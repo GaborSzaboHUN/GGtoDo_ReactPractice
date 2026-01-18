@@ -6,8 +6,8 @@ const App = () => {
     return (
         <>
             <Header />
-            <h1>GGtoDo React Practice</h1>
-            <p>Subtext</p>
+            <h1>BODY</h1>
+
             <Footer />
         </>
     );

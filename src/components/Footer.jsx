@@ -1,6 +1,6 @@
 import React from "react";
 import Time from "./Time.jsx";
-import { year, formattedDate } from "./utils/Date";
+import { year, formattedDate } from "../utils/Date.js";
 
 const Footer = () => {
     return (
