@@ -1,0 +1,83 @@
+/* - - - - RESET CSS - - - - */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+    background: transparent;
+    font-family: "McLaren", "Montserrat", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+a img {
+    border: none;
+}
+
+button,
+a {
+    cursor: pointer;
+    color: inherit;
+}
+
+textarea {
+    resize: none;
+}
+
+button,
+input,
+textarea,
+select {
+    appearance: none !important;
+    border-radius: 0;
+}
+
+/* - - - - END RESET CSS - - - - */
+
+#root {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50px 1fr 50px;
+}
+
+.notes-section {
+    display: flex;
+    gap: 20px;
+}
+
+.notes-section > form {
+    width: fit-content;
+    max-width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.note-box {
+    max-width: 200px;
+    width: fit-content;
+    height: fit-content;
+
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    background-color: antiquewhite;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
