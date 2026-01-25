@@ -2,8 +2,13 @@ import React from "react";
 
 const Header = () => {
     return (
-        <header>
-            <h1>To do Keep</h1>
+        <header className="app-header-bar">
+            <button className="header-bamburger-button">☰</button>
+            <input
+                className="header-search-input"
+                type="text"
+                placeholder="Search..."
+            />
         </header>
     );
 };

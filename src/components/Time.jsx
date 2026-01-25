@@ -9,7 +9,7 @@ const Time = () => {
         setCurrentTime(new Date().toLocaleTimeString("it-IT"));
     }, 1000);
 
-    return <div>{currentTime}</div>;
+    return <div className="footer-time">{currentTime}</div>;
 };
 
 export default Time;

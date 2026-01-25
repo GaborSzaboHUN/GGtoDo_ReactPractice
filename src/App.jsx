@@ -5,11 +5,11 @@ import NotesSection from "./components/NotesSection.jsx";
 
 const App = () => {
     return (
-        <>
+        <div className="app-container">
             <Header />
             <NotesSection />
             <Footer />
-        </>
+        </div>
     );
 };
 
