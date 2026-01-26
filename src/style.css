@@ -206,7 +206,7 @@ select {
 .done-button {
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: -50px;
     opacity: 0;
 
     width: 54px;
