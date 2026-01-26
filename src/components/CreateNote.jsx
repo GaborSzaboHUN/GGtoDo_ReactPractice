@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, use } from "react";
+import DoneIcon from "@mui/icons-material/Done";
 
 const CreateNote = (props) => {
     const [title, setTitle] = useState("");
     const [noteInputs, setNoteInputs] = useState([""]);
+    const [inputFilled, setInputFilled] = useState(false);
+
+    // - - - - - - CHECK IF ANY INPUT FIELD IS FILLED TO ACTIVATE THE SUBMIT BUTTON
+
+    useEffect(() => {
+        if (
+            title.trim().length > 0 ||
+            noteInputs.some((note) => note.trim().length > 0)
+        ) {
+            setInputFilled(true);
+        } else {
+            setInputFilled(false);
+        }
+    }, [title, noteInputs]);
 
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -45,18 +60,18 @@ const CreateNote = (props) => {
             noteList: noteList,
         };
 
-        if (cleanTitle === "" || noteList.length === 0) return;
-        // Majd egy popupot iderakni, hogy ne felejtsd el kitölteni a note-ot
-
-        props.onAddNoteSection(newNoteSection);
-        setTitle("");
-        setNoteInputs([""]);
+        if (cleanTitle.length !== 0 || noteList.length !== 0) {
+            props.onAddNoteSection(newNoteSection);
+            setTitle("");
+            setNoteInputs([""]);
+        }
     };
 
     return (
         <div className="notes-section">
-            <form onSubmit={handleSubmit}>
-                <input
+            <form className="new-note-form" onSubmit={handleSubmit}>
+                <textarea
+                    className="new-note-title"
                     type="text"
                     placeholder="New title..."
                     value={title}
@@ -64,20 +79,29 @@ const CreateNote = (props) => {
                 />
 
                 {noteInputs.map((noteText, index) => (
-                    <input
+                    <textarea
                         key={index}
-                        type="text"
+                        className="new-note-text"
                         placeholder="New note..."
                         value={noteText}
                         onChange={(e) => handleNoteChange(e, index)}
                     />
                 ))}
 
-                <button type="button" onClick={addNewNoteInput}>
-                    + Add new note...
+                <button
+                    className="add-new-note-button"
+                    type="button"
+                    onClick={addNewNoteInput}
+                >
+                    <div>+</div> Add new note...
                 </button>
 
-                <button type="submit">Add Note</button>
+                <button
+                    className={`done-button ${inputFilled ? "active" : ""}`}
+                    type="submit"
+                >
+                    <DoneIcon />
+                </button>
             </form>
         </div>
     );
