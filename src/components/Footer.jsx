@@ -3,7 +3,7 @@ import Time from "./Time.jsx";
 import { year, formattedDate } from "../utils/Date.js";
 import AddIcon from "@mui/icons-material/Add";
 
-const Footer = () => {
+const Footer = (props) => {
     return (
         <>
             <footer>
@@ -13,7 +13,13 @@ const Footer = () => {
                         <Time />
                         <div className="footer-date">{formattedDate}</div>
                     </div>
-                    <button className="add-note-group-button">
+                    <button
+                        className={`add-note-group-button ${
+                            props.isCreateNoteOpen ? "active" : ""
+                        }`}
+                        onClick={props.onToggleCreateNote}
+                        title="Add new note group"
+                    >
                         <AddIcon />
                     </button>
                 </div>

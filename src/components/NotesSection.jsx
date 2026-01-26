@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CreateNote from "./CreateNote.jsx";
 
-const NotesSection = () => {
+const NotesSection = (props) => {
     const [notesGroup, setNotesGroup] = useState([]);
 
     const handleAddNoteSection = (newNoteSection) => {
@@ -10,7 +10,10 @@ const NotesSection = () => {
 
     return (
         <>
-            <CreateNote onAddNoteSection={handleAddNoteSection} />
+            <CreateNote
+                onAddNoteSection={handleAddNoteSection}
+                isCreateNoteOpen={props.isCreateNoteOpen}
+            />
             {notesGroup.map((noteSection) => (
                 <div key={noteSection.id} className="note-section-display">
                     <h2>{noteSection.title}</h2>

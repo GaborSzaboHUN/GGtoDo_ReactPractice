@@ -8,7 +8,7 @@
     box-sizing: border-box;
     background: transparent;
     font-family: "Montserrat", sans-serif;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out !important;
 }
 
 html {
@@ -128,7 +128,7 @@ select {
 
 .new-note-form {
     position: fixed;
-    bottom: 84px;
+    bottom: 10px;
     right: 20px;
 
     width: fit-content;
@@ -143,8 +143,16 @@ select {
     border: 2px solid #8bade0;
     border-radius: 14px;
 
+    visibility: hidden;
+    opacity: 0;
     background-color: #ffffff66;
     box-shadow: 2px 2px 10px 4px rgba(60, 120, 255, 0.2);
+}
+
+.new-note-form.open {
+    bottom: 84px;
+    visibility: visible;
+    opacity: 1;
 }
 
 .new-note-title {
@@ -159,10 +167,18 @@ select {
     letter-spacing: 1px;
 }
 
+.notes-texts-container {
+    width: 100%;
+    min-height: 44px;
+    max-height: calc(100svh - 305px);
+    overflow-y: auto;
+}
+
 .new-note-text {
     width: 100%;
     field-sizing: content;
 
+    margin-bottom: 6px;
     padding: 5px 8px;
     border-radius: 5px;
     border: 1px solid #d6d6dc;
@@ -260,10 +276,19 @@ footer {
     background: linear-gradient(0deg, #5287de, #a1d8fc);
 }
 
+.add-note-group-button.active {
+    background: linear-gradient(0deg, #ff0000, #ff7373);
+}
+
+.add-note-group-button.active svg {
+    transform: rotate(45deg);
+}
+
 .footer-action-container > button > svg {
     width: 1.4em;
     height: 1.4em;
     fill: #ffffff;
+    transform: rotate(0deg);
 }
 
 .footer-time-date-container {

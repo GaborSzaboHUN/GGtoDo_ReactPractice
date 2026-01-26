@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 
 const CreateNote = (props) => {
@@ -60,16 +60,21 @@ const CreateNote = (props) => {
             noteList: noteList,
         };
 
-        if (cleanTitle.length !== 0 || noteList.length !== 0) {
-            props.onAddNoteSection(newNoteSection);
-            setTitle("");
-            setNoteInputs([""]);
-        }
+        if (cleanTitle.length === 0 && noteList.length === 0) return;
+
+        props.onAddNoteSection(newNoteSection);
+        setTitle("");
+        setNoteInputs([""]);
     };
 
     return (
         <div className="notes-section">
-            <form className="new-note-form" onSubmit={handleSubmit}>
+            <form
+                className={`new-note-form ${
+                    props.isCreateNoteOpen ? "open" : ""
+                }`}
+                onSubmit={handleSubmit}
+            >
                 <textarea
                     className="new-note-title"
                     type="text"
@@ -77,16 +82,17 @@ const CreateNote = (props) => {
                     value={title}
                     onChange={handleTitle}
                 />
-
-                {noteInputs.map((noteText, index) => (
-                    <textarea
-                        key={index}
-                        className="new-note-text"
-                        placeholder="New note..."
-                        value={noteText}
-                        onChange={(e) => handleNoteChange(e, index)}
-                    />
-                ))}
+                <div className="notes-texts-container">
+                    {noteInputs.map((noteText, index) => (
+                        <textarea
+                            key={index}
+                            className="new-note-text"
+                            placeholder="New note..."
+                            value={noteText}
+                            onChange={(e) => handleNoteChange(e, index)}
+                        />
+                    ))}
+                </div>
 
                 <button
                     className="add-new-note-button"
