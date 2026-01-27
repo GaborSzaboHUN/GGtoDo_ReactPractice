@@ -9,7 +9,7 @@ const NotesSection = (props) => {
     };
 
     return (
-        <>
+        <div className="notes-section">
             <CreateNote
                 onAddNoteSection={handleAddNoteSection}
                 isCreateNoteOpen={props.isCreateNoteOpen}
@@ -29,7 +29,7 @@ const NotesSection = (props) => {
                     </ul>
                 </div>
             ))}
-        </>
+        </div>
     );
 };
 

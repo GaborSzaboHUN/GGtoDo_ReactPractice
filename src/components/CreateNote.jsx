@@ -68,7 +68,7 @@ const CreateNote = (props) => {
     };
 
     return (
-        <div className="notes-section">
+        <>
             <form
                 className={`new-note-form ${
                     props.isCreateNoteOpen ? "open" : ""
@@ -109,7 +109,7 @@ const CreateNote = (props) => {
                     <DoneIcon />
                 </button>
             </form>
-        </div>
+        </>
     );
 };
 

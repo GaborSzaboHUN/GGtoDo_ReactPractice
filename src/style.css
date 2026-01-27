@@ -123,7 +123,9 @@ select {
 
 .notes-section {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    padding: 20px 20px 0;
 }
 
 .new-note-form {
@@ -249,6 +251,16 @@ select {
     fill: #ffffff;
 }
 
+.note-section-display {
+    width: 100%;
+    max-width: 220px;
+
+    max-height: 285px;
+
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 22px;
+}
 footer {
     display: flex;
     align-items: center;
