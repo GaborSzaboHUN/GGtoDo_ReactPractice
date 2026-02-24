@@ -349,7 +349,7 @@ footer {
 
 .done-button:hover,
 .footer-action-container > button:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 @media (max-width: 1200px) {
