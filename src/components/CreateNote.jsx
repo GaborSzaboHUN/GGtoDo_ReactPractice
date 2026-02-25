@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import DoneIcon from "@mui/icons-material/Done";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const CreateNote = (props) => {
     const [title, setTitle] = useState("");
     const [noteInputs, setNoteInputs] = useState([""]);
     const [inputFilled, setInputFilled] = useState(false);
+    const [noteInputsLength, setNoteInputsLength] = useState(1);
 
     // - - - - - - CHECK IF ANY INPUT FIELD IS FILLED TO ACTIVATE THE SUBMIT BUTTON
 
@@ -36,6 +38,24 @@ const CreateNote = (props) => {
     const addNewNoteInput = () => {
         setNoteInputs((prev) => [...prev, ""]);
     };
+
+
+
+
+    // - - - - - - CHECK THE LENGTH OF THE noteInputs ARRAY TO SEE IF IT CHANGES WHEN ADDING OR REMOVING NOTE INPUTS
+
+    useEffect(() => {
+        setNoteInputsLength(noteInputs.length);
+    }, [noteInputs]);
+
+    // - - - - - REMOVE NOTE INPUT FROM TEH noteInputs ARRAY
+
+    const handleRemoveNoteInput = (index) => {
+        const noteIndexToRemove = index;
+        setNoteInputs((prev) => prev.filter((_, index) => index !== noteIndexToRemove));
+    };
+
+    
 
     // - - - - - - HANDLE FORM SUBMISSION
 
@@ -84,13 +104,26 @@ const CreateNote = (props) => {
                 />
                 <div className="notes-texts-container">
                     {noteInputs.map((noteText, index) => (
-                        <textarea
+                        <div 
+                            className="note-texts-wrapper" 
                             key={index}
-                            className="new-note-text"
-                            placeholder="New note..."
-                            value={noteText}
-                            onChange={(e) => handleNoteChange(e, index)}
-                        />
+                        >
+                            <textarea
+                                className="new-note-text"
+                                placeholder="New note..."
+                                value={noteText}
+                                onChange={(e) => handleNoteChange(e, index)}
+                            />
+                            {noteInputsLength > 1 && (
+                                <button
+                                    className="remove-note-button"
+                                    type="button"
+                                    onClick={ () => handleRemoveNoteInput(index) }
+                                >
+                                    <DeleteOutlineIcon />
+                                </button>
+                            )}
+                        </div>
                     ))}
                 </div>
 
