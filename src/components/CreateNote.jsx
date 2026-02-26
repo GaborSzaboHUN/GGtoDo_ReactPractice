@@ -4,7 +4,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const CreateNote = (props) => {
     const [title, setTitle] = useState("");
-    const [noteInputs, setNoteInputs] = useState([""]);
+    const [noteInputs, setNoteInputs] = useState([{id: crypto.randomUUID(), text: "", isDone: false}]);
     const [inputFilled, setInputFilled] = useState(false);
     const [noteInputsLength, setNoteInputsLength] = useState(1);
 
@@ -13,7 +13,7 @@ const CreateNote = (props) => {
     useEffect(() => {
         if (
             title.trim().length > 0 ||
-            noteInputs.some((note) => note.trim().length > 0)
+            noteInputs.some((note) => note.text.trim().length > 0)
         ) {
             setInputFilled(true);
         } else {
@@ -25,20 +25,19 @@ const CreateNote = (props) => {
         setTitle(e.target.value);
     };
 
-    // - - - - - - HANDLE CHANGES IN EACH NOTE INPUT FIELD ACCORDING TO ITS INDEX
+    // - - - - - - HANDLE CHANGES IN EACH NOTE INPUT FIELD ACCORDING TO ITS ID
 
-    const handleNoteChange = (e, index) => {
-        const newNoteInputs = [...noteInputs];
-        newNoteInputs[index] = e.target.value;
-        setNoteInputs(newNoteInputs);
+    const handleNoteChange = (e, id) => {
+        setNoteInputs((prev) => (
+            prev.map((note) => note.id === id ? {...note, text: e.target.value} : note)
+        ));
     };
 
     // - - - - - ADD NEW NOTE INPUT TO THE END OF THE noteInputs ARRAY
 
     const addNewNoteInput = () => {
-        setNoteInputs((prev) => [...prev, ""]);
+        setNoteInputs((prev) => [...prev, {id: crypto.randomUUID(), text: "", isDone: false}]);
     };
-
 
 
 
@@ -50,9 +49,9 @@ const CreateNote = (props) => {
 
     // - - - - - REMOVE NOTE INPUT FROM TEH noteInputs ARRAY
 
-    const handleRemoveNoteInput = (index) => {
-        const noteIndexToRemove = index;
-        setNoteInputs((prev) => prev.filter((_, index) => index !== noteIndexToRemove));
+    const handleRemoveNoteInput = (id) => {
+        const noteIdToRemove = id;
+        setNoteInputs((prev) => prev.filter((note) => note.id !== noteIdToRemove));
     };
 
     
@@ -64,14 +63,7 @@ const CreateNote = (props) => {
 
         // - - - - - CREATE noteList ARRAY BASED ON noteInputs ARRAY
 
-        const noteList = noteInputs
-            .filter((note) => note.trim() !== "")
-            .map((noteText) => ({
-                id: Date.now() + Number((Math.random() * 10000).toFixed(0)),
-                name: noteText.trim(),
-                isDone: false,
-            }));
-
+        const noteList = noteInputs.filter((note) => note.text.trim() !== "")
         const cleanTitle = title.trim();
 
         const newNoteSection = {
@@ -84,7 +76,7 @@ const CreateNote = (props) => {
 
         props.onAddNoteSection(newNoteSection);
         setTitle("");
-        setNoteInputs([""]);
+        setNoteInputs([{id: crypto.randomUUID(), text: "", isDone: false}]);
     };
 
     return (
@@ -103,22 +95,22 @@ const CreateNote = (props) => {
                     onChange={handleTitle}
                 />
                 <div className="notes-texts-container">
-                    {noteInputs.map((noteText, index) => (
+                    {noteInputs.map((note) => (
                         <div 
                             className="note-texts-wrapper" 
-                            key={index}
+                            key={note.id}
                         >
                             <textarea
                                 className="new-note-text"
                                 placeholder="New note..."
-                                value={noteText}
-                                onChange={(e) => handleNoteChange(e, index)}
+                                value={note.text}
+                                onChange={(e) => handleNoteChange(e, note.id)}
                             />
                             {noteInputsLength > 1 && (
                                 <button
                                     className="remove-note-button"
                                     type="button"
-                                    onClick={ () => handleRemoveNoteInput(index) }
+                                    onClick={ () => handleRemoveNoteInput(note.id) }
                                 >
                                     <DeleteOutlineIcon />
                                 </button>
