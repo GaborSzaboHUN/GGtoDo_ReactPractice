@@ -7,7 +7,6 @@ const CreateNote = (props) => {
     const [title, setTitle] = useState("");
     const [noteInputs, setNoteInputs] = useState([{id: crypto.randomUUID(), text: "", isDone: false}]);
     const [inputFilled, setInputFilled] = useState(false);
-    const [noteInputsLength, setNoteInputsLength] = useState(1);
 
     // - - - - - - CHECK IF ANY INPUT FIELD IS FILLED TO ACTIVATE THE SUBMIT BUTTON
 
@@ -41,12 +40,6 @@ const CreateNote = (props) => {
     };
 
 
-
-    // - - - - - - CHECK THE LENGTH OF THE noteInputs ARRAY TO SEE IF IT CHANGES WHEN ADDING OR REMOVING NOTE INPUTS
-
-    useEffect(() => {
-        setNoteInputsLength(noteInputs.length);
-    }, [noteInputs]);
 
     // - - - - - REMOVE NOTE INPUT FROM THE noteInputs ARRAY
 
@@ -108,7 +101,7 @@ const CreateNote = (props) => {
                                 value={note.text}
                                 onChange={(e) => handleNoteChange(e, note.id)}
                             />
-                            {noteInputsLength > 1 && (
+                            {noteInputs.length > 1 && (
                                 <button
                                     className="remove-note-button"
                                     type="button"
