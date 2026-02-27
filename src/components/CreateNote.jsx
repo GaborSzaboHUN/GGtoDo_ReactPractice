@@ -1,6 +1,7 @@
 import React, { useState, useEffect, use } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const CreateNote = (props) => {
     const [title, setTitle] = useState("");
@@ -47,7 +48,7 @@ const CreateNote = (props) => {
         setNoteInputsLength(noteInputs.length);
     }, [noteInputs]);
 
-    // - - - - - REMOVE NOTE INPUT FROM TEH noteInputs ARRAY
+    // - - - - - REMOVE NOTE INPUT FROM THE noteInputs ARRAY
 
     const handleRemoveNoteInput = (id) => {
         const noteIdToRemove = id;
@@ -63,17 +64,18 @@ const CreateNote = (props) => {
 
         // - - - - - CREATE noteList ARRAY BASED ON noteInputs ARRAY
 
-        const noteList = noteInputs.filter((note) => note.text.trim() !== "")
-        const cleanTitle = title.trim();
+        const noteList = noteInputs
+            .map((note) => ({id: note.id, name: note.text, isDone: false}))
+            .filter((note) => note.name.trim() !== "");
 
+        const cleanTitle = title.trim();
         const newNoteSection = {
             id: Date.now(),
             title: cleanTitle,
             noteList: noteList,
         };
-
         if (cleanTitle.length === 0 && noteList.length === 0) return;
-
+        
         props.onAddNoteSection(newNoteSection);
         setTitle("");
         setNoteInputs([{id: crypto.randomUUID(), text: "", isDone: false}]);
@@ -112,7 +114,8 @@ const CreateNote = (props) => {
                                     type="button"
                                     onClick={ () => handleRemoveNoteInput(note.id) }
                                 >
-                                    <DeleteOutlineIcon />
+                                    <DeleteForeverIcon className="delete-forever-icon" />
+                                    <DeleteOutlineIcon className="delete-outline-icon"/>
                                 </button>
                             )}
                         </div>
