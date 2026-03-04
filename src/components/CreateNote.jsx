@@ -1,7 +1,7 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
+import NoteInput from "./NoteInput";
 import DoneIcon from "@mui/icons-material/Done";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 
 const CreateNote = (props) => {
     const [title, setTitle] = useState("");
@@ -91,27 +91,13 @@ const CreateNote = (props) => {
                 />
                 <div className="notes-texts-container">
                     {noteInputs.map((note) => (
-                        <div 
-                            className="note-texts-wrapper" 
+                        <NoteInput 
                             key={note.id}
-                        >
-                            <textarea
-                                className="new-note-text"
-                                placeholder="New note..."
-                                value={note.text}
-                                onChange={(e) => handleNoteChange(e, note.id)}
-                            />
-                            {noteInputs.length > 1 && (
-                                <button
-                                    className="remove-note-button"
-                                    type="button"
-                                    onClick={ () => handleRemoveNoteInput(note.id) }
-                                >
-                                    <DeleteForeverIcon className="delete-forever-icon" />
-                                    <DeleteOutlineIcon className="delete-outline-icon"/>
-                                </button>
-                            )}
-                        </div>
+                            note={note}
+                            handleNoteChange={handleNoteChange}
+                            handleRemoveNoteInput={handleRemoveNoteInput}
+                            noteInputsLength={noteInputs.length}
+                        />
                     ))}
                 </div>
 
