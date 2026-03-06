@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CreateNote from "./CreateNote.jsx";
+import CreateNewNote from "./CreateNewNote.jsx";
 
-const NotesSection = (props) => {
+const AllNotesCollection = (props) => {
     const [notesGroup, setNotesGroup] = useState([]);
 
     const handleAddNoteSection = (newNoteSection) => {
@@ -10,7 +10,7 @@ const NotesSection = (props) => {
 
     return (
         <div className="notes-section">
-            <CreateNote
+            <CreateNewNote
                 onAddNoteSection={handleAddNoteSection}
                 isCreateNoteOpen={props.isCreateNoteOpen}
             />
@@ -33,4 +33,4 @@ const NotesSection = (props) => {
     );
 };
 
-export default NotesSection;
+export default AllNotesCollection;

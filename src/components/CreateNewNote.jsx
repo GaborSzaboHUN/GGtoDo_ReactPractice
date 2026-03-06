@@ -3,7 +3,7 @@ import NoteInput from "./NoteInput";
 import DoneIcon from "@mui/icons-material/Done";
 
 
-const CreateNote = (props) => {
+const CreateNewNote = (props) => {
     const [title, setTitle] = useState("");
     const [noteInputs, setNoteInputs] = useState([{id: crypto.randomUUID(), text: "", isDone: false}]);
     const [inputFilled, setInputFilled] = useState(false);
@@ -120,4 +120,4 @@ const CreateNote = (props) => {
     );
 };
 
-export default CreateNote;
+export default CreateNewNote;

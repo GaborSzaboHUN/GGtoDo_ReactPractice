@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
-import NotesSection from "./components/NotesSection.jsx";
+import AllNotesCollection from "./components/AllNotesCollection.jsx";
 
 const App = () => {
     const [isCreateNoteOpen, setIsCreateNoteOpen] = useState(false);
@@ -13,7 +13,7 @@ const App = () => {
     return (
         <div className="app-container">
             <Header />
-            <NotesSection isCreateNoteOpen={isCreateNoteOpen} />
+            <AllNotesCollection isCreateNoteOpen={isCreateNoteOpen} />
             <Footer
                 onToggleCreateNote={toggleCreateNote}
                 isCreateNoteOpen={isCreateNoteOpen}
