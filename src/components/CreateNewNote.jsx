@@ -66,6 +66,7 @@ const CreateNewNote = (props) => {
             id: Date.now(),
             title: cleanTitle,
             noteList: noteList,
+            color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 85%)`,
         };
         if (cleanTitle.length === 0 && noteList.length === 0) return;
         

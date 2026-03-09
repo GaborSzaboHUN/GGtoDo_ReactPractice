@@ -37,6 +37,7 @@ const AllNotesCollection = (props) => {
                     id={noteSection.id} 
                     title={noteSection.title} 
                     noteList={noteSection.noteList}
+                    color={noteSection.color}
                     onCardClick={handleSelectedNoteId}
                 />
             ))}
