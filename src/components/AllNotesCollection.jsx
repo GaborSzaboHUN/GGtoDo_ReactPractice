@@ -39,12 +39,13 @@ const AllNotesCollection = (props) => {
                     noteList={noteSection.noteList}
                     color={noteSection.color}
                     onCardClick={handleSelectedNoteId}
-                />
-            ))}
+                    />
+                ))}
             {selectedNoteId && (
                 <SelectedNoteSection 
                     title={selectedNoteSection.title}
                     noteList={selectedNoteSection.noteList}
+                    color={selectedNoteSection.color}
                     isDoneStatusChange={handleDoneStatusChange}
                     onCloseSelectedNote={handleCloseSelectedNote}
                 />

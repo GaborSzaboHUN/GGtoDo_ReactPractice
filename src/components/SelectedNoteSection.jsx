@@ -1,8 +1,9 @@
 import React from "react";
 
-const SelectedNoteSection = ({title, noteList, onCloseSelectedNote, isDoneStatusChange}) => {
+const SelectedNoteSection = ({title, noteList, onCloseSelectedNote, isDoneStatusChange, color}) => {
     return (
         <div className="selected-note-section">
+        <div className="note-color-stripe" style={{backgroundColor: color}}></div>
         <h2>{title}</h2>
         <ul>
             {noteList.map((note) => (
