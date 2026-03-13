@@ -12,7 +12,6 @@ const App = () => {
 
     return (
         <div className="app-container">
-            <div className="blur"></div>
             <Header />
             <AllNotesCollection isCreateNoteOpen={isCreateNoteOpen} />
             <Footer
